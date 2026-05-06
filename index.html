@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>م. إسماعيل للصرافة - محمي من النسخ</title>
+    <style>
+        :root { 
+            --primary: #008080; 
+            --secondary: #25D366; 
+            --dark: #2d3436; 
+            --light: #ffffff; 
+            --usd-glow: #85bb65; 
+            --sdg-glow: #d63031; 
+            --syp-glow: #2ecc71; 
+            --crypto: #2775ca;
+        } 
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; margin: 0; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        } 
+        
+        .phone-frame { 
+            width: 360px; height: 740px; background: var(--light); 
+            border-radius: 40px; border: 8px solid var(--dark); 
+            position: relative; overflow: hidden; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4); 
+            display: flex; flex-direction: column; 
+        } 
+        
+        .flag-syp-custom { 
+            width: 52px; height: 34px; display: flex; flex-direction: column; 
+            border: 2px solid #ddd; margin-left: 15px; border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        } 
+        .band { height: 33.33%; width: 100%; } 
+        .green { background: #007a3d; } 
+        .white { background: #ffffff; display: flex; justify-content: center; align-items: center; gap: 3px; } 
+        .black { background: #000000; } 
+        .star { color: #ce1126; font-size: 10px; line-height: 1; font-weight: bold; } 
+        
+        .flag-sdg-custom {
+            width: 52px; height: 34px; display: flex; flex-direction: column; position: relative;
+            border: 2px solid #ddd; margin-left: 15px; border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2); overflow: hidden;
+        }
+        .flag-sdg-custom .stripe { flex: 1; width: 100%; }
+        .flag-sdg-custom .red { background: #D21034; order: 1; }
+        .flag-sdg-custom .white { background: #FFFFFF; order: 2; }
+        .flag-sdg-custom .black { background: #000000; order: 3; }
+        .flag-sdg-custom .triangle {
+            position: absolute; left: 0; top: 0;
+            width: 0; height: 0;
+            border-top: 17px solid transparent;
+            border-bottom: 17px solid transparent;
+            border-left: 20px solid #007A3D;
+            z-index: 2;
+        }
+        
+        .top-bar { 
+            background: var(--primary); color: white; padding: 20px 15px 15px; 
+            text-align: center; border-radius: 0 0 25px 25px; 
+        } 
+        
+        .crypto-alert {
+            background: linear-gradient(135deg, var(--crypto) 0%, #1e5a9e 100%);
+            color: white; padding: 12px 15px; margin: 12px 15px 0;
+            border-radius: 15px; text-align: center; font-weight: bold;
+            font-size: 0.95rem; box-shadow: 0 4px 15px rgba(39,117,202,0.4);
+            border: 2px solid rgba(255,255,255,0.3);
+            animation: cryptoGlow 2s infinite;
+        }
+        @keyframes cryptoGlow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(39,117,202,0.4); }
+            50% { box-shadow: 0 6px 25px rgba(39,117,202,0.7); }
+        }
+        
+        .live-rates { 
+            display: flex; justify-content: space-around; margin-top: 12px; 
+            background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; 
+        } 
+        .rate-box { transition: transform 0.3s; display: flex; align-items: center; gap: 8px; } 
+        .rate-box.pulse { animation: pulse 0.5s; } 
+        @keyframes pulse { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.15); } 
+            100% { transform: scale(1); } 
+        } 
+        
+        .mini-flag-syp {
+            width: 28px; height: 18px; display: flex; flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.5); border-radius: 2px;
+        }
+        .mini-flag-syp .band { height: 33.33%; width: 100%; }
+        .mini-flag-syp .green { background: #007a3d; }
+        .mini-flag-syp .white { background: #fff; display: flex; justify-content: center; align-items: center; gap: 1px; }
+        .mini-flag-syp .black { background: #000; }
+        .mini-flag-syp .star { color: #ce1126; font-size: 5px; }
+        
+        .mini-flag-sdg {
+            width: 28px; height: 18px; position: relative;
+            display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 2px; overflow: hidden;
+        }
+        .mini-flag-sdg .stripe { flex: 1; width: 100%; }
+        .mini-flag-sdg .red { background: #D21034; order: 1; }
+        .mini-flag-sdg .white { background: #FFFFFF; order: 2; }
+        .mini-flag-sdg .black { background: #000000; order: 3; }
+        .mini-flag-sdg .triangle {
+            position: absolute; left: 0; top: 0;
+            width: 0; height: 0;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-left: 11px solid #007A3D;
+        }
+        
+        .content-area { 
+            flex: 1; padding: 20px; display: flex; flex-direction: column; 
+            justify-content: flex-start; overflow-y: auto;
+        } 
+        .step { display: none; animation: fadeIn 0.4s ease; } 
+        .step.active { display: block; } 
+        
+        .choice-btn { 
+            background: #fff; border: 3px solid #f0f0f0; padding: 22px; 
+            margin: 14px 0; border-radius: 25px; display: flex; 
+            align-items: center; cursor: pointer; transition: 0.3s; 
+            position: relative; overflow: hidden; 
+        } 
+        .choice-btn:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+        } 
+        .choice-btn.sdg:hover { 
+            border-color: var(--sdg-glow); 
+            box-shadow: 0 15px 30px rgba(214,48,49,0.3); 
+        } 
+        .choice-btn.syp:hover { 
+            border-color: var(--syp-glow); 
+            box-shadow: 0 15px 30px rgba(46,204,113,0.3); 
+        } 
+        
+        .game-calc { 
+            background: #f9f9f9; padding: 22px; border-radius: 25px; 
+            margin-bottom: 12px; border: 1px solid #eee; text-align: center; 
+        } 
+        .swap-btn { 
+            width: 50px; height: 50px; margin: 10px auto; 
+            background: var(--primary); border-radius: 50%; border: none; 
+            color: white; font-size: 1.5rem; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; 
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(0,128,128,0.3); 
+        } 
+        .swap-btn:hover { 
+            transform: rotate(180deg) scale(1.1); 
+            background: var(--secondary); 
+        } 
+        .swap-btn:active { transform: rotate(180deg) scale(0.95); } 
+        
+        .currency-box { 
+            background: white; padding: 15px; border-radius: 15px; 
+            margin: 10px 0; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05); 
+        } 
+        .currency-label { 
+            font-size: 0.9rem; color: #666; margin-bottom: 8px; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; 
+        } 
+        .currency-icon { font-size: 1.5rem; } 
+        
+        input[type="range"] { 
+            width: 100%; height: 12px; border-radius: 10px; 
+            background: #ddd; outline: none; -webkit-appearance: none; 
+            margin: 10px 0; 
+        } 
+        input[type="range"]::-webkit-slider-thumb { 
+            -webkit-appearance: none; width: 28px; height: 28px; 
+            border-radius: 50%; background: var(--primary); 
+            cursor: pointer; border: 4px solid white; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s; 
+        } 
+        input[type="range"]::-webkit-slider-thumb:hover { 
+            transform: scale(1.2); background: var(--secondary); 
+        } 
+        
+        .amount-display { 
+            font-size: 2.2rem; color: var(--primary); 
+            font-weight: bold; margin: 10px 0; transition: 0.3s; 
+        } 
+        .amount-display.update { animation: numberPop 0.3s; } 
+        @keyframes numberPop { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.15); color: var(--secondary); } 
+            100% { transform: scale(1); } 
+        } 
+        
+        .execute-order-btn {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white; padding: 18px; border-radius: 20px; 
+            text-align: center; font-weight: bold; cursor: pointer; 
+            border: none; width: 100%; font-size: 1.2rem; 
+            transition: 0.3s; box-shadow: 0 8px 20px rgba(243,156,18,0.4); 
+            margin: 10px 0; display: none;
+        }
+        .execute-order-btn.show { display: block; }
+        .execute-order-btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 25px rgba(243,156,18,0.5); 
+        }
+        
+        .whatsapp-action { 
+            background: var(--secondary); color: white; padding: 18px; 
+            border-radius: 20px; text-align: center; font-weight: bold; 
+            cursor: pointer; border: none; width: 100%; font-size: 1.2rem; 
+            transition: 0.3s; box-shadow: 0 8px 20px rgba(37,211,102,0.3); 
+            margin-top: 10px; 
+        } 
+        .whatsapp-action:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 25px rgba(37,211,102,0.4); 
+        } 
+        
+        #admin-panel { 
+            position: absolute; bottom: 0; width: 100%; 
+            background: #1a1a1a; color: white; padding: 20px; 
+            box-sizing: border-box; display: none; z-index: 100; 
+            border-radius: 25px 25px 0 0; 
+        } 
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: scale(0.95); } 
+            to { opacity: 1; transform: scale(1); } 
+        } 
+    </style> 
+</head> 
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"> 
+    <div class="phone-frame"> 
+        <div onclick="handleAdmin()" style="position:absolute; top:0; left:0; width:60px; height:60px; z-index:99;"></div> 
+        <div class="top-bar"> 
+            <h2 style="margin:0; font-size:1.3rem;">م. إسماعيل للصرافة 💸</h2> 
+            <p style="margin:5px 0 0 0; font-size:0.9rem; opacity:0.9;">يا هلا بالغالي، تكرم عينك</p> 
+            
+            <div class="crypto-alert">
+                💎 يوجد بيع وشراء USDT - عملات رقمية 💎
+            </div>
+            
+            <div class="live-rates"> 
+                <!-- الليرة السورية عاليمين -->
+                <div class="rate-box" id="rateBoxSyp"> 
+                    <div class="mini-flag-syp">
+                        <div class="band green"></div> 
+                        <div class="white" style="gap:1px;">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div> 
+                        <div class="band black"></div> 
+                    </div> 
+                    <span id="rate-syp-view">15000</span> 
+                </div> 
+                
+                <!-- الجنيه السوداني عاليسار -->
+                <div class="rate-box" id="rateBoxSdg">
+                    <div class="mini-flag-sdg">
+                        <div class="stripe red"></div>
+                        <div class="stripe white"></div>
+                        <div class="stripe black"></div>
+                        <div class="triangle"></div>
+                    </div>
+                    <span id="rate-sdg-view">2500</span>
+                </div> 
+            </div> 
+        </div> 
+        <div class="content-area"> 
+            <div id="step-1" class="step active"> 
+                <h3 style="text-align:center; color:var(--dark); margin-bottom:25px;">شو بدك تحول اليوم يا معلم؟ ✨</h3> 
+                
+                <!-- الليرة السورية أول -->
+                <div class="choice-btn syp" onclick="openCalc('syp')"> 
+                    <div class="flag-syp-custom">
+                        <div class="band green"></div> 
+                        <div class="white"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div> 
+                        <div class="band black"></div> 
+                    </div> 
+                    <div style="text-align:right; flex:1;"> 
+                        <strong style="font-size:1.2rem;">الليرة السورية</strong><br> 
+                        <small style="color:#888;">علم التحرير - تحويل فوري</small> 
+                    </div> 
+                </div> 
+                
+                <!-- الجنيه السوداني بعدها -->
+                <div class="choice-btn sdg" onclick="openCalc('sdg')"> 
+                    <div class="flag-sdg-custom">
+                        <div class="stripe red"></div>
+                        <div class="stripe white"></div>
+                        <div class="stripe black"></div>
+                        <div class="triangle"></div>
+                    </div> 
+                    <div style="text-align:right; flex:1;"> 
+                        <strong style="font-size:1.2rem;">الجنيه السوداني</strong><br> 
+                        <small style="color:#888;">من عيوني، سعرنا أحلى سعر</small> 
+                    </div> 
+                </div> 
+            </div> 
+            <div id="step-2" class="step"> 
+                <h3 id="calc-title" style="text-align:center; margin-bottom:15px;">يلا نحسبها سوا</h3> 
+                <div class="game-calc"> 
+                    <div class="currency-box"> 
+                        <div class="currency-label"> 
+                            <span class="currency-icon" id="fromIcon">💵</span> 
+                            <span id="fromLabel">دولار أمريكي</span> 
+                        </div> 
+                        <input type="range" min="1" max="1000" value="100" id="amountSlider" oninput="runGameCalc()"> 
+                        <div class="amount-display" id="fromAmount">$100</div> 
+                    </div> 
+                    <button class="swap-btn" onclick="swapDirection()">⇅</button> 
+                    <p style="font-size:0.8rem; color:#888; margin:-5px 0 5px 0;">كبس هون لتقلب الاتجاه</p> 
+                    <div class="currency-box"> 
+                        <div class="currency-label"> 
+                            <span class="currency-icon" id="toIcon">🇸🇩</span> 
+                            <span id="toLabel">جنيه سوداني</span> 
+                        </div> 
+                        <div class="amount-display" id="toAmount">250,000 SDG</div> 
+                    </div> 
+                </div> 
+                
+                <button class="execute-order-btn" id="executeBtn" onclick="executeOrder()">
+                    📝 تنفيذ الطلب وإرساله عالواتساب
+                </button>
+                
+                <button class="whatsapp-action" onclick="sendToWA()">ابعته عالواتساب يا غالي 💬</button> 
+                <p onclick="goHome()" style="text-align:center; color:var(--primary); cursor:pointer; text-decoration:underline; margin-top:15px;">
+                    ⬅️ بدك تغير العملة؟ ارجع لهون
+                </p> 
+            </div> 
+        </div> 
+        <div id="admin-panel"> 
+            <h4 style="margin:0 0 15px 0;">⚙️ لوحة التحكم يا معلم</h4> 
+            <label>سعر السوداني:</label> 
+            <input type="number" id="adj-sdg" style="width:100%; padding:10px; margin:5px 0 15px; border-radius:8px; border:none;" value="2500"> 
+            <label>سعر السوري:</label> 
+            <input type="number" id="adj-syp" style="width:100%; padding:10px; margin:5px 0 15px; border-radius:8px; border:none;" value="15000"> 
+            <button onclick="applyAdmin()" style="width:100%; padding:12px; background:var(--primary); color:white; border:none; border-radius:10px; font-weight:bold;">حدث الآن</button> 
+        </div> 
+    </div> 
+    <script> 
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('selectstart', event => event.preventDefault());
+        document.addEventListener('dragstart', event => event.preventDefault());
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'a')) {
+                e.preventDefault(); return false;
+            }
+            if (e.key === 'F12') { e.preventDefault(); return false; }
+        });
+        
+        let currentMode = 'syp'; 
+        let rates = { sdg: 2500, syp: 15000 }; 
+        let adminClicks = 0; 
+        let isUsdToLocal = true; 
+        let currentValue = 100;
+        
+        function openCalc(mode) { 
+            currentMode = mode; 
+            isUsdToLocal = true; 
+            document.getElementById('step-1').classList.remove('active'); 
+            document.getElementById('step-2').classList.add('active'); 
+            document.getElementById('calc-title').innerText = mode === 'sdg'? 'يلا نحسب السوداني يا خاي 🇸🇩' : 'يلا نحسب السوري يا معلم 🇸🇾'; 
+            document.getElementById('amountSlider').value = 100; 
+            updateLabels(); 
+            runGameCalc(); 
+        } 
+        
+        function goHome() { 
+            document.getElementById('step-2').classList.remove('active'); 
+            document.getElementById('step-1').classList.add('active'); 
+            document.getElementById('executeBtn').classList.remove('show');
+        } 
+        
+        function swapDirection() { 
+            isUsdToLocal = !isUsdToLocal; 
+            updateLabels(); 
+            runGameCalc(); 
+            document.querySelector('.swap-btn').style.transform = 'rotate(360deg)'; 
+            setTimeout(() => { 
+                document.querySelector('.swap-btn').style.transform = 'rotate(0deg)'; 
+            }, 300); 
+        } 
+        
+        function updateLabels() { 
+            const localName = currentMode === 'sdg'? 'جنيه سوداني' : 'ليرة سورية'; 
+            const localIcon = currentMode === 'sdg'? '🇸🇩' : '🇸🇾'; 
+            if(isUsdToLocal) { 
+                document.getElementById('fromIcon').textContent = '💵'; 
+                document.getElementById('fromLabel').textContent = 'دولار أمريكي'; 
+                document.getElementById('toIcon').textContent = localIcon; 
+                document.getElementById('toLabel').textContent = localName; 
+                document.getElementById('amountSlider').max = 1000; 
+                document.getElementById('amountSlider').min = 1; 
+            } else { 
+                document.getElementById('fromIcon').textContent = localIcon; 
+                document.getElementById('fromLabel').textContent = localName; 
+                document.getElementById('toIcon').textContent = '💵'; 
+                document.getElementById('toLabel').textContent = 'دولار أمريكي'; 
+                document.getElementById('amountSlider').max = 1000000; 
+                document.getElementById('amountSlider').min = 100; 
+            } 
+        } 
+        
+        function runGameCalc() { 
+            currentValue = parseFloat(document.getElementById('amountSlider').value); 
+            const rate = rates[currentMode]; 
+            let fromDisplay, toDisplay; 
+            
+            if(isUsdToLocal) { 
+                fromDisplay = `$${currentValue.toLocaleString('en-US')}`; 
+                toDisplay = `${(currentValue * rate).toLocaleString('en-US')} ${currentMode.toUpperCase()}`; 
+            } else { 
+                fromDisplay = `${currentValue.toLocaleString('en-US')} ${currentMode.toUpperCase()}`; 
+                toDisplay = `$${(currentValue / rate).toFixed(2)}`; 
+            } 
+            
+            const fromEl = document.getElementById('fromAmount'); 
+            const toEl = document.getElementById('toAmount'); 
+            fromEl.textContent = fromDisplay; 
+            toEl.textContent = toDisplay; 
+            fromEl.classList.add('update'); 
+            setTimeout(() => fromEl.classList.remove('update'), 300); 
+            
+            if(currentValue > 0) {
+                document.getElementById('executeBtn').classList.add('show');
+            } else {
+                document.getElementById('executeBtn').classList.remove('show');
+            }
+        } 
+        
+        function executeOrder() {
+            const rate = rates[currentMode]; 
+            const localName = currentMode === 'sdg'? 'الجنيه السوداني 🇸🇩' : 'الليرة السورية 🇸🇾'; 
+            let txt; 
+            
+            if(isUsdToLocal) { 
+                const localAmount = (currentValue * rate).toLocaleString('en-US'); 
+                txt = `🔥 *طلب تنفيذ تحويل* 🔥\n\n` +
+                      `📋 *تفاصيل الطلب:*\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `💵 المبلغ المحول: $${currentValue.toLocaleString('en-US')}\n` +
+                      `🔄 نوع العملية: بيع USDT\n` +
+                      `📥 بدي استلم: ${localName}\n` +
+                      `💰 المبلغ المستحق: ${localAmount} ${currentMode.toUpperCase()}\n` +
+                      `📊 سعر الصرف: 1 USD = ${rate.toLocaleString('en-US')} ${currentMode.toUpperCase()}\n` +
+                      `━━━━━━━━━━━━━━━━\n\n` +
+                      `✅ موافق عالسعر\n` +
+                      `📱 الرجاء تأكيد الطلب وإرسال تفاصيل الدفع`;
+            } else { 
+                const usdAmount = (currentValue / rate).toFixed(2); 
+                txt = `🔥 *طلب تنفيذ تحويل* 🔥\n\n` +
+                      `📋 *تفاصيل الطلب:*\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `💵 المبلغ المحول: ${currentValue.toLocaleString('en-US')} ${currentMode.toUpperCase()}\n` +
+                      `🔄 نوع العملية: شراء USDT\n` +
+                      `📥 بدي استلم: دولار أمريكي USDT\n` +
+                      `💰 المبلغ المستحق: $${usdAmount}\n` +
+                      `📊 سعر الصرف: 1 USD = ${rate.toLocaleString('en-US')} ${currentMode.toUpperCase()}\n` +
+                      `━━━━━━━━━━━━━━━━\n\n` +
+                      `✅ موافق عالسعر\n` +
+                      `📱 الرجاء تأكيد الطلب وإرسال تفاصيل الدفع`;
+            } 
+            window.open(`https://wa.me/963962561536?text=${encodeURIComponent(txt)}`, '_blank'); 
+        }
+        
+        function sendToWA() { 
+            const rate = rates[currentMode]; 
+            const localName = currentMode === 'sdg'? 'الجنيه السوداني 🇸🇩' : 'الليرة السورية 🇸🇾'; 
+            let txt; 
+            if(isUsdToLocal) { 
+                const localAmount = (currentValue * rate).toLocaleString('en-US'); 
+                txt = `أهلا م. إسماعيل للصرافة\n\nشو يا غالي، بدي حول 🔄\nمن: دولار أمريكي $${currentValue}\nإلى: ${localName}\nبيطلعلك: ${localAmount}\nالسعر: ${rate}\n\nتم من لعبة التحويل ✨`; 
+            } else { 
+                const usdAmount = (currentValue / rate).toFixed(2); 
+                txt = `أهلا م. إسماعيل للصرافة\n\nشو يا معلم، بدي حول 🔄\nمن: ${localName} ${currentValue.toLocaleString('en-US')}\nإلى: دولار أمريكي\nبيطلعلك: $${usdAmount}\nالسعر: ${rate}\n\nتم من لعبة التحويل ✨`; 
+            } 
+            window.open(`https://wa.me/963962561536?text=${encodeURIComponent(txt)}`, '_blank'); 
+        } 
+        
+        function handleAdmin() { 
+            adminClicks++; 
+            if(adminClicks === 5) { 
+                if(prompt("كلمة السر يا كبير:") === "1234") { 
+                    document.getElementById('admin-panel').style.display='block'; 
+                } 
+                adminClicks = 0; 
+            } 
+        } 
+        
+        function applyAdmin() { 
+            rates.sdg = parseFloat(document.getElementById('adj-sdg').value); 
+            rates.syp = parseFloat(document.getElementById('adj-syp').value); 
+            document.getElementById('rate-sdg-view').innerText = rates.sdg; 
+            document.getElementById('rate-syp-view').innerText = rates.syp; 
+            document.getElementById('rateBoxSdg').classList.add('pulse'); 
+            document.getElementById('rateBoxSyp').classList.add('pulse'); 
+            setTimeout(() => { 
+                document.getElementById('rateBoxSdg').classList.remove('pulse'); 
+                document.getElementById('rateBoxSyp').classList.remove('pulse'); 
+            }, 500); 
+            document.getElementById('admin-panel').style.display='none'; 
+            runGameCalc(); 
+        } 
+    </script> 
+</body> 
+</html>
