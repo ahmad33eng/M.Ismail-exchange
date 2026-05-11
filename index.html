@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">م. إسماعيل للصرافة</title>
+    <!-- Firebase v9 -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyBOXdcW29xPJeFAwpMokzXNRrywUXTlR8U",
+          authDomain: "ismail-7257e.firebaseapp.com",
+          databaseURL: "https://ismail-7257e-default-rtdb.firebaseio.com",
+          projectId: "ismail-7257e",
+          storageBucket: "ismail-7257e.firebasestorage.app",
+          messagingSenderId: "206586253450",
+          appId: "1:206586253450:web:dc40ed610efcb6a8071d73",
+          measurementId: "G-7BYTRT08K6"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+    </script>
+  <style>
+    :root { --primary: #008080; --secondary: #25D366; --dark: #2d3436; --light: #ffffff; --usd-glow: #85bb65; --sdg-glow: #d63031; --syp-glow: #2ecc71; --ticker: #f39c12; --maintenance-bg: #008080; --alert: #e74c3c; --ticker-rates-bg: rgba(0,0,0,0.05); }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.phone-frame { width: 360px; height: 740px; background: var(--light); border-radius: 40px; border: 8px solid var(--dark); position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.4); display: flex; flex-direction: column; }
+
+    /* علم الثورة السوري - 3 نجوم حمر */
+.flag-syp-custom { width: 52px; height: 34px; display: flex; flex-direction: column; border: 2px solid #ddd; margin-left: 15px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.flag-syp-custom.band { height: 33.33%; width: 100%; }
+.flag-syp-custom.green { background: #007a3d; }
+.flag-syp-custom.white { background: #ffffff; display: flex; justify-content: center; align-items: center; gap: 5px; }
+.flag-syp-custom.black { background: #000000; }
+.flag-syp-custom.star-red { color: #ce1126; font-size: 10px; line-height: 1; font-weight: bold; }
+
+    /* العلم السوداني */
+.flag-sdg-custom { width: 52px; height: 34px; display: flex; flex-direction: column; position: relative; border: 2px solid #ddd; margin-left: 15px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); overflow: hidden; }
+.flag-sdg-custom.stripe { flex: 1; width: 100%; }
+.flag-sdg-custom.red { background: #D21034; order: 1; }
+.flag-sdg-custom.white { background: #FFFFFF; order: 2; }
+.flag-sdg-custom.black { background: #000000; order: 3; }
+.flag-sdg-custom.triangle { position: absolute; left: 0; top: 0; width: 0; height: 0; border-top: 17px solid transparent; border-bottom: 17px solid transparent; border-left: 20px solid #007A3D; z-index: 2; }
+
+    /* أعلام صغيرة لشريط الأسعار */
+.mini-flag-rate-syp { width: 24px; height: 16px; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.5); border-radius: 2px; }
+.mini-flag-rate-syp.band { height: 33.33%; width: 100%; }
+.mini-flag-rate-syp.green { background: #007a3d; }
+.mini-flag-rate-syp.white { background: #fff; display: flex; justify-content: center; align-items: center; gap: 2px; }
+.mini-flag-rate-syp.black { background: #000; }
+.mini-flag-rate-syp.star-red { color: #ce1126; font-size: 4px; }
+
+.mini-flag-rate-sdg { width: 24px; height: 16px; position: relative; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.5); border-radius: 2px; overflow: hidden; }
+.mini-flag-rate-sdg.stripe { flex: 1; width: 100%; }
+.mini-flag-rate-sdg.red { background: #D21034; order: 1; }
+.mini-flag-rate-sdg.white { background: #FFFFFF; order: 2; }
+.mini-flag-rate-sdg.black { background: #000000; order: 3; }
+.mini-flag-rate-sdg.triangle { position: absolute; left: 0; top: 0; width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 10px solid #007A3D; }
+
+    /* أعلام صغيرة للعبة الحاسبة */
+.mini-flag-calc-syp { width: 32px; height: 21px; display: flex; flex-direction: column; border: 1px solid #ddd; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.mini-flag-calc-syp.band { height: 33.33%; width: 100%; }
+.mini-flag-calc-syp.green { background: #007a3d; }
+.mini-flag-calc-syp.white { background: #fff; display: flex; justify-content: center; align-items: center; gap: 3px; }
+.mini-flag-calc-syp.black { background: #000; }
+.mini-flag-calc-syp.star-red { color: #ce1126; font-size: 6px; }
+
+.mini-flag-calc-sdg { width: 32px; height: 21px; position: relative; display: flex; flex-direction: column; border: 1px solid #ddd; border-radius: 3px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.mini-flag-calc-sdg.stripe { flex: 1; width: 100%; }
+.mini-flag-calc-sdg.red { background: #D21034; order: 1; }
+.mini-flag-calc-sdg.white { background: #FFFFFF; order: 2; }
+.mini-flag-calc-sdg.black { background: #000000; order: 3; }
+.mini-flag-calc-sdg.triangle { position: absolute; left: 0; top: 0; width: 0; height: 0; border-top: 10.5px solid transparent; border-bottom: 10.5px solid transparent; border-left: 13px solid #007A3D; }
+
+.top-bar { background: var(--primary); color: white; padding: 20px 15px 15px; text-align: center; border-radius: 0 0 25px; }
+.ticker-wrap { width: 100%; overflow: hidden; background: rgba(0,0,0,0.2); margin-top: 10px; border-radius: 8px; }
+.ticker { display: inline-block; white-space: nowrap; padding: 8px 0; font-weight: bold; font-size: 0.9rem; color: var(--ticker); }
+.ticker.moving { animation: ticker 15s linear infinite; }
+    @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.last-update { text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 5px; }
+.price-alert { background: rgba(231,76,60,0.2); border: 1px solid var(--alert); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 0.75rem; margin-top: 8px; display: none; animation: blink 1.5s infinite; }
+.price-alert.show { display: block; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+.live-rates { display: flex; justify-content: space-around; margin-top: 12px; background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; flex-wrap: wrap; gap: 8px; min-height: 38px; }
+.rate-box { transition: transform 0.3s; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
+.rate-box.pulse { animation: pulse 0.5s; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.mini-flag { width: 24px; height: 16px; border: 1px solid rgba(255,255,255,0.5); border-radius: 2px; object-fit: cover; }
+.content-area { flex: 1; padding: 20px; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; }
+.step { display: none; animation: fadeIn 0.4s ease; }
+.step.active { display: block; }
+.home-question { text-align: center; color: var(--dark); margin: 0 0 15px 0; font-size: 1.1rem; font-weight: bold; }
+.choice-btn { background: #fff; border: 3px solid #f0f0f0; padding: 22px; margin: 14px 0; border-radius: 25px; display: flex; align-items: center; cursor: pointer; transition: 0.3s; position: relative; overflow: hidden; }
+.choice-btn:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.flag-img { width: 52px; height: 34px; border: 2px solid #ddd; margin-left: 15px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); object-fit: cover; }
+.currency-alert { position: absolute; top: 8px; left: 8px; background: var(--alert); color: white; font-size: 0.65rem; padding: 3px 8px; border-radius: 10px; animation: blink 2s infinite; z-index: 5; }
+.game-calc { background: #f9f9f9; padding: 22px; border-radius: 25px; margin-bottom: 12px; border: 1px solid #eee; text-align: center; }
+.swap-btn { width: 50px; height: 50px; margin: 10px auto; background: var(--primary); border-radius: 50%; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,128,128,0.3); }
+.swap-btn:hover { transform: rotate(180deg) scale(1.1); background: var(--secondary); }
+.swap-btn:active { transform: rotate(180deg) scale(0.95); }
+.currency-box { background: white; padding: 15px; border-radius: 15px; margin: 10px 0; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05); }
+.currency-label { font-size: 0.9rem; color: #666; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.currency-icon { display: flex; align-items: center; justify-content: center; }
+    input[type="range"] { width: 100%; height: 12px; border-radius: 10px; background: #ddd; outline: none; -webkit-appearance: none; margin: 10px 0; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); cursor: pointer; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); background: var(--secondary); }
+.amount-display { font-size: 2.2rem; color: var(--primary); font-weight: bold; margin: 10px 0; transition: 0.3s; }
+.amount-display.update { animation: numberPop 0.3s; }
+    @keyframes numberPop { 0% { transform: scale(1); } 50% { transform: scale(1.15); color: var(--secondary); } 100% { transform: scale(1); } }
+.execute-order-btn { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 18px; border-radius: 20px; text-align: center; font-weight: bold; cursor: pointer; border: none; width: 100%; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 8px 20px rgba(243,156,18,0.4); margin: 10px 0; display: none; }
+.execute-order-btn.show { display: block; }
+.execute-order-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(243,156,18,0.5); }
+.whatsapp-action { background: var(--secondary); color: white; padding: 18px; border-radius: 20px; text-align: center; font-weight: bold; cursor: pointer; border: none; width: 100%; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 8px 20px rgba(37,211,102,0.3); margin-top: 10px; }
+.whatsapp-action:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(37,211,102,0.4); }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.hidden { display: none!important; }
+.loading-flag { text-align: center; color: #999; padding: 20px; font-size: 0.9rem; }
+.maintenance-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--maintenance-bg); display: none; justify-content: center; align-items: center; z-index: 9999; text-align: center; padding: 20px; }
+.maintenance-overlay.show { display: flex; }
+.maintenance-box { background: white; padding: 40px 30px; border-radius: 25px; max-width: 300px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.maintenance-icon { font-size: 4rem; margin-bottom: 15px; }
+.maintenance-title { font-size: 1.5rem; color: var(--dark); font-weight: bold; margin-bottom: 10px; }
+.maintenance-text { color: #666; line-height: 1.6; }
+
+/* شريط الأسعار الجديد قبل "شو بدك تحول" */
+.rates-ticker-wrap { width: 100%; overflow: hidden; background: var(--ticker-rates-bg); margin-bottom: 15px; border-radius: 12px; border: 1px solid #eee; }
+.rates-ticker { display: flex; white-space: nowrap; padding: 12px 0; gap: 25px; align-items: center; }
+.rates-ticker.moving { animation: tickerRates 20s linear infinite; }
+.rates-ticker.static { justify-content: center; flex-wrap: wrap; }
+    @keyframes tickerRates { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.rate-ticker-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--dark); font-weight: bold; }
+  </style>
+</head>
+<body id="body-bg" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+  <div class="phone-frame">
+    <div class="top-bar" id="top-bar">
+      <h2 id="main-title" style="margin:0; font-size:1.3rem;">م. إسماعيل للصرافة 💸</h2>
+      <p id="sub-title" style="margin:5px 0 0 0; font-size:0.9rem; opacity:0.9;">يا هلا بالغالي، تكرم عينك</p>
+      <div class="ticker-wrap" id="ticker-box">
+        <div class="ticker" id="ticker-text">سعر الصرف اليوم قابل للتحديث</div>
+      </div>
+      <div class="price-alert" id="price-alert-box">⚠️ تنبيه: الأسعار غير مستقرة حالياً</div>
+      <div class="live-rates" id="live-rates-box"></div>
+      <div class="last-update" id="last-update-box">آخر تحديث: <span id="last-update">--</span></div>
+    </div>
+    <div class="content-area" id="content-bg">
+      <div id="step-1" class="step active">
+        <!-- الشريط الجديد -->
+        <div class="rates-ticker-wrap" id="rates-ticker-box">
+          <div class="rates-ticker" id="rates-ticker"></div>
+        </div>
+
+        <h3 class="home-question" id="home-question">شو بدك تحول اليوم يا معلم؟ ✨</h3>
+        <div id="flags-container">
+          <div class="loading-flag">جاري تحميل العملات...</div>
+        </div>
+      </div>
+
+      <div id="step-2" class="step">
+        <h3 id="calc-title" style="text-align:center; margin-bottom:15px;">يلا نحسبها سوا</h3>
+        <div class="game-calc" id="game-calc-box">
+          <div class="currency-box">
+            <div class="currency-label"> <span class="currency-icon" id="fromIcon">💵</span> <span id="fromLabel">دولار أمريكي</span> </div>
+            <input type="range" min="1" max="1000" value="100" id="amountSlider" oninput="runGameCalc()">
+            <div class="amount-display" id="fromAmount">$100</div>
+          </div>
+          <button class="swap-btn" id="swap-btn" onclick="swapDirection()">⇅</button>
+          <p id="swap-text" style="font-size:0.8rem; color:#888; margin:-5px 0 5px 0;">كبس هون لتقلب الاتجاه</p>
+          <div class="currency-box">
+            <div class="currency-label"> <span class="currency-icon" id="toIcon"></span> <span id="toLabel">عملة محلية</span> </div>
+            <div class="amount-display" id="toAmount">0</div>
+          </div>
+        <button class="execute-order-btn" id="executeBtn" onclick="executeOrder()"> <span id="execute-text">📝 تنفيذ الطلب وإرساله عالواتساب</span> </button>
+        <button class="whatsapp-action" id="whatsapp-btn" onclick="sendToWA()"><span id="whatsapp-text">ابعته عالواتساب يا غالي 💬</span></button>
+        <p onclick="goHome()" id="back-btn" style="text-align:center; color:var(--primary); cursor:pointer; text-decoration:underline; margin-top:15px;"> <span id="back-text">⬅️ بدك تغير العملة؟ ارجع لهون</span> </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="maintenance-overlay" id="maintenance-overlay">
+    <div class="maintenance-box">
+      <div class="maintenance-icon">🔧</div>
+      <div class="maintenance-title" id="maintenance-title-view">الموقع قيد الصيانة حالياً</div>
+      <div class="maintenance-text" id="maintenance-text-view">عم نحدث الأسعار، راجعنا بعد شوي يا غالي 🙏</div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script>
+    let currentMode = '';
+    let currenciesData = {};
+    let rates = {};
+    let isUsdToLocal = true;
+    let currentValue = 100;
+    let whatsappNumber = '963962561536';
+    let userCountry = '';
+
+    const firebaseConfig = {
+      apiKey: "حط_الـapiKey_تبعك",
+      authDomain: "حط_الـauthDomain_تبعك",
+      databaseURL: "حط_الـdatabaseURL_تبعك",
+      projectId: "حط_الـprojectId_تبعك"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    db.ref('currencies').once('value').then(snap => {
+      if(!snap.exists()) {
+        const defaultCurrencies = {
+          syp: { name: 'الليرة السورية', desc: 'العلم الجديد - تحويل فوري', rate: 15000, flag: '', order: 1, active: true, customFlag: 'syp', unstableAlert: false },
+          sdg: { name: 'الجنيه السوداني', desc: 'من عيوني، سعرنا أحلى سعر', rate: 2500, flag: '', order: 2, active: true, customFlag: 'sdg', unstableAlert: false }
+        };
+        db.ref('currencies').set(defaultCurrencies);
+      }
+    });
+
+    async function loadCurrenciesAndRender() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        userCountry = data.country_code || '';
+      } catch(e) { userCountry = ''; }
+
+      db.ref('currencies').on('value', (snapshot) => {
+        currenciesData = snapshot.val() || {};
+        rates = {};
+        Object.keys(currenciesData).forEach(code => {
+          rates[code] = currenciesData[code].rate || 1;
+        });
+        renderDynamicFlags();
+        renderLiveRates();
+        renderRatesTicker();
+        runGameCalc();
+      });
+    }
+
+    function getCustomFlagHTML(code, size = 'rate') {
+      if(code === 'syp') {
+        if(size === 'rate') {
+          return `<div class="mini-flag-rate-syp"><div class="band green"></div><div class="white"><span class="star-red">★</span><span class="star-red">★</span><span class="star-red">★</span></div><div class="band black"></div></div>`;
+        } else {
+          return `<div class="mini-flag-calc-syp"><div class="band green"></div><div class="white"><span class="star-red">★</span><span class="star-red">★</span><span class="star-red">★</span></div><div class="band black"></div></div>`;
+        }
+      } else if(code === 'sdg') {
+        if(size === 'rate') {
+          return `<div class="mini-flag-rate-sdg"><div class="stripe red"></div><div class="stripe white"></div><div class="stripe black"></div><div class="triangle"></div></div>`;
+        } else {
+          return `<div class="mini-flag-calc-sdg"><div class="stripe red"></div><div class="stripe white"></div><div class="stripe black"></div><div class="triangle"></div></div>`;
+        }
+      }
+      return '';
+    }
+
+    function renderLiveRates() {
+      const box = document.getElementById('live-rates-box');
+      let html = '';
+      Object.keys(currenciesData).filter(c => currenciesData[c].active).sort((a,b) => (currenciesData[a].order || 99) - (currenciesData[b].order || 99)).slice(0,4).forEach(code => {
+        const c = currenciesData[code];
+        let flagHTML = '';
+        if(c.customFlag) {
+          flagHTML = getCustomFlagHTML(code, 'rate');
+        } else {
+          flagHTML = `<img src="${c.flag}" class="mini-flag" onerror="this.style.display='none'">`;
+        }
+        html += `<div class="rate-box">${flagHTML}<span>${c.rate}</span></div>`;
+      });
+      box.innerHTML = html || '<div style="color:rgba(255,255,255,0.7);font-size:0.8rem;">لا توجد عملات</div>';
+    }
+
+    function renderRatesTicker() {
+      const box = document.getElementById('rates-ticker');
+      let html = '';
+      Object.keys(currenciesData).filter(c => currenciesData[c].active).sort((a,b) => (currenciesData[a].order || 99) - (currenciesData[b].order || 99)).forEach(code => {
+        const c = currenciesData[code];
+        let flagHTML = '';
+        if(c.customFlag) {
+          flagHTML = getCustomFlagHTML(code, 'rate');
+        } else {
+          flagHTML = `<img src="${c.flag}" class="mini-flag" onerror="this.style.display='none'">`;
+        }
+        html += `<div class="rate-ticker-item">${flagHTML}<span>${c.name}: ${c.rate}</span></div>`;
+      });
+      box.innerHTML = html || '<div style="color:#999;font-size:0.8rem;">لا توجد عملات</div>';
+    }
+
+    function renderDynamicFlags() {
+      const container = document.getElementById('flags-container');
+      let activeCurrencies = Object.keys(currenciesData).filter(code => currenciesData[code].active).sort((a,b) => (currenciesData[a].order || 99) - (currenciesData[b].order || 99));
+
+      const countryMap = { 'SY': 'syp', 'SD': 'sdg', 'SA': 'sar', 'AE': 'aed', 'TR': 'try', 'EG': 'egp' };
+      const preferredCode = countryMap[userCountry];
+      if(preferredCode && activeCurrencies.includes(preferredCode)) {
+        activeCurrencies = [preferredCode,...activeCurrencies.filter(c => c!== preferredCode)];
+      }
+
+      let html = '';
+      activeCurrencies.forEach((code) => {
+        const c = currenciesData[code];
+        const alertHTML = c.unstableAlert? `<div class="currency-alert">⚠️ سعر متقلب</div>` : '';
+        let flagHTML = '';
+        if(c.customFlag) {
+          flagHTML = code === 'syp'? `<div class="flag-syp-custom"><div class="band green"></div><div class="white"><span class="star-red">★</span><span class="star-red">★</span><span class="star-red">★</span></div><div class="band black"></div></div>` : `<div class="flag-sdg-custom"><div class="stripe red"></div><div class="stripe white"></div><div class="stripe black"></div><div class="triangle"></div></div>`;
+        } else {
+          flagHTML = `<img src="${c.flag}" class="flag-img" onerror="this.style.display='none'">`;
+        }
+        html += `
+          <div class="choice-btn ${code}" id="${code}-btn" onclick="openCalc('${code}')">
+            ${alertHTML}
+            <div style="display:flex; align-items:center;">
+              ${flagHTML}
+              <div style="text-align:right; flex:1;">
+                <strong style="font-size:1.2rem;">${c.name}</strong><br>
+                <small style="color:#888;">${c.desc}</small>
+              </div>
+            </div>
+          </div>`;
+      });
+      container.innerHTML = html || '<div class="loading-flag">لا توجد عملات مفعلة من الأدمن</div>';
+    }
+
+    loadCurrenciesAndRender();
+
+    db.ref('controls').on('value', (snapshot) => {
+      const c = snapshot.val() || {};
+      whatsappNumber = c.whatsapp || '963962561536';
+      setText('page-title', c.pageTitle);
+      setText('main-title', c.mainTitle);
+      setText('sub-title', c.subTitle);
+      setText('home-question', c.homeQuestion);
+      setText('calc-title', c.calcTitle);
+      setText('swap-text', c.swapText);
+      setText('execute-text', c.executeText);
+      setText('whatsapp-text', c.whatsappText);
+      setText('back-text', c.backText);
+      setText('last-update', c.lastUpdate || 'غير محدد');
+      setColor('--primary', c.colorPrimary);
+      setColor('--secondary', c.colorSecondary);
+      setColor('--ticker', c.tickerColor);
+      setColor('--ticker-rates-bg', c.tickerRatesBg || 'rgba(0,0,0,0.05)');
+      if(c.bodyBg) document.getElementById('body-bg').style.background = c.bodyBg;
+      if(c.contentBg) document.getElementById('content-bg').style.background = c.contentBg;
+      if(c.topBarBg) document.getElementById('top-bar').style.background = c.topBarBg;
+
+      toggleShow('ticker-box', c.showTicker);
+      setText('ticker-text', c.tickerText);
+      if(c.tickerColor) document.getElementById('ticker-text').style.color = c.tickerColor;
+      const tickerEl = document.getElementById('ticker-text');
+      if(c.tickerMoving === false) {
+        tickerEl.classList.remove('moving');
+      } else {
+        tickerEl.classList.add('moving');
+      }
+
+      toggleShow('price-alert-box', c.showPriceAlert);
+      toggleShow('live-rates-box', c.showLiveRates);
+      toggleShow('last-update-box', c.showLiveRates);
+      toggleShow('swap-btn', c.showSwapBtn);
+      toggleShow('executeBtn', c.showExecuteBtn);
+      toggleShow('whatsapp-btn', c.showWhatsappBtn);
+      toggleShow('back-btn', c.showBackBtn);
+
+      // الشريط الجديد
+      toggleShow('rates-ticker-box', c.showRatesTicker);
+      const ratesTickerEl = document.getElementById('rates-ticker');
+      if(c.ratesTickerMoving === false) {
+        ratesTickerEl.classList.remove('moving');
+        ratesTickerEl.classList.add('static');
+      } else {
+        ratesTickerEl.classList.add('moving');
+        ratesTickerEl.classList.remove('static');
+      }
+
+      if(c.maintenanceMode) {
+        document.getElementById('maintenance-overlay').classList.add('show');
+        setText('maintenance-title-view', c.maintenanceTitle);
+        setText('maintenance-text-view', c.maintenanceText);
+        document.documentElement.style.setProperty('--maintenance-bg', c.maintenanceBg || '#008080');
+      } else {
+        document.getElementById('maintenance-overlay').classList.remove('show');
+      }
+    });
+
+    function setText(id, val) { if(val!== undefined && document.getElementById(id)) document.getElementById(id).innerText = val; }
+    function setColor(prop, val) { if(val) document.documentElement.style.setProperty(prop, val); }
+    function toggleShow(id, show) {
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(show === false) el.classList.add('hidden');
+      else el.classList.remove('hidden');
+    }
+
+    function getFlagHTML(code) {
+      if(currenciesData[code] && currenciesData[code].customFlag) {
+        return getCustomFlagHTML(code, 'calc');
+      }
+      return '💱';
+    }
+
+    function openCalc(mode) {
+      currentMode = mode; isUsdToLocal = true;
+      document.getElementById('step-1').classList.remove('active');
+      document.getElementById('step-2').classList.add('active');
+      const cName = currenciesData[currentMode]?.name || 'عملة';
+      document.getElementById('calc-title').innerText = `يلا نحسب ${cName} يا معلم`;
+      document.getElementById('amountSlider').value = 100;
+      updateLabels(); runGameCalc();
+    }
+    function goHome() {
+      document.getElementById('step-2').classList.remove('active');
+      document.getElementById('step-1').classList.add('active');
+    }
+    function swapDirection() {
+      isUsdToLocal =!isUsdToLocal; updateLabels(); runGameCalc();
+      document.querySelector('.swap-btn').style.transform = 'rotate(360deg)';
+      setTimeout(() => { document.querySelector('.swap-btn').style.transform = 'rotate(0deg)'; }, 300);
+    }
+    function updateLabels() {
+      const localName = currenciesData[currentMode]?.name || 'عملة محلية';
+      const flagHTML = getFlagHTML(currentMode);
+      if(isUsdToLocal) {
+        document.getElementById('fromIcon').innerHTML = '💵';
+        document.getElementById('fromLabel').textContent = 'دولار أمريكي';
+        document.getElementById('toIcon').innerHTML = flagHTML;
+        document.getElementById('toLabel').textContent = localName;
+        document.getElementById('amountSlider').max = 1000;
+        document.getElementById('amountSlider').min = 1;
+      } else {
+        document.getElementById('fromIcon').innerHTML = flagHTML;
+        document.getElementById('fromLabel').textContent = localName;
+        document.getElementById('toIcon').innerHTML = '💵';
+        document.getElementById('toLabel').textContent = 'دولار أمريكي';
+        document.getElementById('amountSlider').max = 1000000;
+        document.getElementById('amountSlider').min = 100;
+      }
+    }
+    function runGameCalc() {
+      if(!currentMode ||!rates[currentMode]) return;
+      currentValue = parseFloat(document.getElementById('amountSlider').value);
+      const rate = rates[currentMode];
+      let fromDisplay, toDisplay;
+      if(isUsdToLocal) {
+        fromDisplay = `$${currentValue.toLocaleString('en-US')}`;
+        toDisplay = `${(currentValue * rate).toLocaleString('en-US')} ${currentMode.toUpperCase()}`;
+      } else {
+        fromDisplay =
